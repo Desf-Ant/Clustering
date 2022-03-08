@@ -208,5 +208,20 @@ void MainWindow::clic_3D ( void )
 }
 
 void MainWindow::openFile() {
-    std::cout << "okok" << std::endl;
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("csv"), "",
+            tr("csv (*.csv)"));
+    std::cout << "try to open " << fileName.toStdString() << std::endl;
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly|QIODevice::Text))
+        return;
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList liste = line.split(";");
+        for (int i=0; i<(int)liste.size();i++)
+            std::cout << liste[i].toStdString() << " ";
+       std::cout << std::endl;
+    }
+    file.close();
 }

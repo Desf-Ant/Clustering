@@ -16,6 +16,8 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QShortcut>
+#include <QFileDialog>
+#include <QFile>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
