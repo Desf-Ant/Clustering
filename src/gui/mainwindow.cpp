@@ -14,6 +14,10 @@ void MainWindow::init_components ( void )
     this->principal = new QWidget();
     this->menu = new QWidget();
 
+    // shortcuts
+    this->openShortcut = new QShortcut(this);
+    this->openShortcut->setKey(Qt::CTRL | Qt::Key_O);
+
     this->generation = new QGroupBox( "Génération" );
     this->choix_nb_sommets = new QSpinBox();
     this->choix_nb_sommets->setMinimum(1);
@@ -112,6 +116,7 @@ void MainWindow::init_slots ( void )
     connect ( this->bouton_dbscan, SIGNAL(clicked()), this, SLOT(clic_dbscan()) );
     connect ( this->bouton_2D, SIGNAL(clicked()), this, SLOT(clic_2D()) );
     connect ( this->bouton_3D, SIGNAL(clicked()), this, SLOT(clic_3D()) );
+    connect ( this->openShortcut, SIGNAL(activated()), this, SLOT(openFile()) );
 }
 
 MainWindow::~MainWindow()
@@ -200,4 +205,8 @@ void MainWindow::clic_3D ( void )
 {
     this->bouton_2D->setChecked(false);
     this->bouton_3D->setChecked(true);
+}
+
+void MainWindow::openFile() {
+    std::cout << "okok" << std::endl;
 }

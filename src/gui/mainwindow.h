@@ -15,6 +15,7 @@
 #include <QSpinBox>
 #include <QPushButton>
 #include <QLabel>
+#include <QShortcut>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -29,6 +30,9 @@ class MainWindow : public QMainWindow
         QWidget* principal;
         Scene* scene;
         QWidget* menu;
+
+        // shortcuts
+        QShortcut *openShortcut;
 
         // Les paramètres
         QGroupBox* generation;
@@ -83,5 +87,6 @@ class MainWindow : public QMainWindow
         void clic_dbscan ( void );
         void clic_2D ( void );
         void clic_3D ( void );
+        void openFile( void );
 };
 #endif // MAINWINDOW_H
