@@ -42,3 +42,11 @@ void Note::affiche() const {
     }
     std::cout << "classe -> " << this->classe << std::endl;
 }
+
+Note Note::random(int n) {
+    std::vector < double > noteListe = std::vector < double >();
+    for (int i=0; i<n; i++) {
+        noteListe.push_back(rand()%20);
+    }
+    return Note(noteListe);
+}

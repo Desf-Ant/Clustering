@@ -25,6 +25,13 @@ double Distance::calcul ( const Sommet& A, const Sommet& B ) const
     }
 }
 
+double Distance::calculNote(const Note &A, const Note &B) const {
+    switch (this->type) {
+    case EUCLIDIENNE : return this->calculEuclienneNote( A, B ); break;
+    default          : return Distance::INFINIE;
+    }
+}
+
 double Distance::calculManhattan ( const Sommet& A, const Sommet& B ) const
 {
     return std::abs(B.getX() - A.getX())+std::abs(B.getY()-A.getY())+std::abs(B.getZ()-A.getZ());
@@ -45,4 +52,11 @@ double Distance::calculChebyshev ( const Sommet& A, const Sommet& B ) const
 double Distance::calculCosinus ( const Sommet& A, const Sommet& B ) const
 {
     return 1 - (A.getX()*B.getX()+A.getY()*B.getY()+A.getZ()*B.getZ())/(std::sqrt(std::pow(A.getX(),2)+std::pow(A.getY(),2)+std::pow(A.getZ(),2))*std::sqrt(std::pow(B.getX(),2)+std::pow(B.getY(),2)+std::pow(B.getZ(),2)));
+}
+
+double Distance::calculEuclienneNote(const Note &A, const Note &B) const {
+    double distance = 0;
+    for (int i=0; i<A.getSizeDimension();i++)
+        distance += std::pow(A.getCoeffAt(i)-B.getCoeffAt(i),2);
+    return std::sqrt(distance);
 }

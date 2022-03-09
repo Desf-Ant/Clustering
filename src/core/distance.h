@@ -2,6 +2,7 @@
 #define DISTANCE_H
 
 #include "sommet.h"
+#include "note.h"
 
 #include <limits>
 #include "math.h"
@@ -21,12 +22,15 @@ class Distance
         Distance();
         Distance( type_dist t );
         double calcul ( const Sommet& A, const Sommet& B ) const;
+        double calculNote ( const Note& A, const Note& B) const;
 
     private :
         double calculManhattan   ( const Sommet& A, const Sommet& B ) const;
         double calculEuclidienne ( const Sommet& A, const Sommet& B ) const;
         double calculChebyshev   ( const Sommet& A, const Sommet& B ) const;
         double calculCosinus     ( const Sommet& A, const Sommet& B ) const;
+
+        double calculEuclienne ()
 };
 
 #endif // DISTANCE_H

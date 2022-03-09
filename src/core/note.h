@@ -19,6 +19,8 @@ public:
     void setClasse ( int n );
     void ajoute ( const Note& autre );
     void affiche ( void ) const;
+
+    static Note random(int n);
 };
 
 #endif // NOTE_H

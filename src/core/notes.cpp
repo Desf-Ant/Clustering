@@ -10,6 +10,10 @@ void Notes::addNote(Note n) {
     this->allNotes->push_back(n);
 }
 
+std::vector< Note >* Notes::getDonnees () const {
+    return this->allNotes;
+}
+
 Note Notes::getNoteAt(int index) const {
     if (index <= 0 || index >= (int)this->allNotes->size() )
         return Note();
