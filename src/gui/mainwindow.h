@@ -8,6 +8,8 @@
 #include "../clustering/pam.h"
 #include "../clustering/hierarchical.h"
 #include "../clustering/dbscan.h"
+#include "../clustering/kmeannotes.h"
+#include "../clustering/kmediannotes.h"
 #include "../core/notes.h"
 #include "../core/note.h"
 

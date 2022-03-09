@@ -2,7 +2,7 @@
 
 KmeanNotes::KmeanNotes ( Notes* d, unsigned int n, type_dist t )
 {
-    assert ( nb_classes > 0 );
+    assert ( n > 0 );
     this->donnees = d;
     this->lesDonnees = d->getDonnees();
     this->nb_classes = n;

@@ -13,6 +13,7 @@ public:
     Notes();
     void addNote ( Note n );
     Note getNoteAt( int index ) const;
+    std::vector < Note >* getDonnees( void ) const;
 
     void affiche ( void ) const;
 };

@@ -222,13 +222,15 @@ void MainWindow::openFile() {
         QStringList liste = line.split(";");
         std::vector< double> listeNote = std::vector< double >();
         for (int i=0; i<(int)liste.size();i++) {
-            std::cout << liste[i].toStdString() << "  ";
             listeNote.push_back(liste.at(i).toDouble());
         }
         notes.addNote(Note(listeNote));
-        std::cout << std::endl;
     }
-    std::cout << std::endl << std::endl << std::endl;
     file.close();
+
+    unsigned int nb_classes = this->choix_nb_classes->value();
+    type_dist type = (type_dist)(this->choix_distance->currentIndex());
+    KmedianNotes kn = KmedianNotes(&notes, nb_classes, type);
+    kn.execute();
     notes.affiche();
 }

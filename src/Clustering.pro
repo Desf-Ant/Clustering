@@ -10,7 +10,9 @@ CONFIG += c++11
 
 SOURCES += \
     clustering/hierarchical.cpp \
+    clustering/hierarchicalnotes.cpp \
     clustering/kmeannotes.cpp \
+    clustering/kmediannotes.cpp \
     clustering/kmedians.cpp \
     clustering/dbscan.cpp \
     clustering/pam.cpp \
@@ -27,7 +29,9 @@ SOURCES += \
 
 HEADERS += \
     clustering/hierarchical.h \
+    clustering/hierarchicalnotes.h \
     clustering/kmeannotes.h \
+    clustering/kmediannotes.h \
     clustering/kmedians.h \
     clustering/dbscan.h \
     clustering/pam.h \

@@ -74,9 +74,9 @@ bool Kmedians::calculNouvelleGraines ( void )
             std::sort(this->listesX.at(i).begin(), this->listesX.at(i).end());
             std::sort(this->listesY.at(i).begin(), this->listesY.at(i).end());
             std::sort(this->listesZ.at(i).begin(), this->listesZ.at(i).end());
-            int center = this->listesX.at(i).size() / 2;
+            int indexCentre = this->listesX.at(i).size() / 2;
 
-            this->graines.at(i) = Sommet(this->listesX.at(i).at(center), this->listesY.at(i).at(center), this->listesZ.at(i).at(center));
+            this->graines.at(i) = Sommet(this->listesX.at(i).at(indexCentre), this->listesY.at(i).at(indexCentre), this->listesZ.at(i).at(indexCentre));
 
             if (this->distance.calcul(this->graines.at(i), oldSeed)>Distance::EPSILON) {
                 majs = true;
