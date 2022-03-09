@@ -2,6 +2,7 @@
 
 Hierarchical::Hierarchical ( Donnees* d, unsigned int n, type_dist t )
 {
+    // Bonne visualisation avec une generation de 100
     this->donnees = d;
     this->lesDonnees = d->getDonnees();
     this->nb_classes_objectif = n;

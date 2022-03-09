@@ -216,12 +216,19 @@ void MainWindow::openFile() {
     if (!file.open(QIODevice::ReadOnly|QIODevice::Text))
         return;
     QTextStream in(&file);
+    Notes notes = Notes();
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList liste = line.split(";");
-        for (int i=0; i<(int)liste.size();i++)
-            std::cout << liste[i].toStdString() << " ";
-       std::cout << std::endl;
+        std::vector< double> listeNote = std::vector< double >();
+        for (int i=0; i<(int)liste.size();i++) {
+            std::cout << liste[i].toStdString() << "  ";
+            listeNote.push_back(liste.at(i).toDouble());
+        }
+        notes.addNote(Note(listeNote));
+        std::cout << std::endl;
     }
+    std::cout << std::endl << std::endl << std::endl;
     file.close();
+    notes.affiche();
 }

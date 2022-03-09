@@ -8,6 +8,8 @@
 #include "../clustering/pam.h"
 #include "../clustering/hierarchical.h"
 #include "../clustering/dbscan.h"
+#include "../core/notes.h"
+#include "../core/note.h"
 
 #include <QMainWindow>
 #include <QGroupBox>

@@ -13,6 +13,8 @@ SOURCES += \
     clustering/kmedians.cpp \
     clustering/dbscan.cpp \
     clustering/pam.cpp \
+    core/note.cpp \
+    core/notes.cpp \
     data_science/acp.cpp \
     clustering/kmeans.cpp \
     core/distance.cpp \
@@ -27,6 +29,8 @@ HEADERS += \
     clustering/kmedians.h \
     clustering/dbscan.h \
     clustering/pam.h \
+    core/note.h \
+    core/notes.h \
     data_science/acp.h \
     clustering/kmeans.h \
     core/distance.h \
