@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clustering/dbscannote.cpp \
     clustering/hierarchical.cpp \
     clustering/hierarchicalnotes.cpp \
     clustering/kmeannotes.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     gui/scene.cpp
 
 HEADERS += \
+    clustering/dbscannote.h \
     clustering/hierarchical.h \
     clustering/hierarchicalnotes.h \
     clustering/kmeannotes.h \
