@@ -10,6 +10,7 @@
 #include "../clustering/dbscan.h"
 #include "../clustering/kmeannotes.h"
 #include "../clustering/kmediannotes.h"
+#include "../clustering/hierarchicalnotes.h"
 #include "../core/notes.h"
 #include "../core/note.h"
 

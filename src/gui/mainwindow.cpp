@@ -230,7 +230,7 @@ void MainWindow::openFile() {
 
     unsigned int nb_classes = this->choix_nb_classes->value();
     type_dist type = (type_dist)(this->choix_distance->currentIndex());
-    KmedianNotes kn = KmedianNotes(&notes, nb_classes, type);
+    HierarchicalNotes kn = HierarchicalNotes(&notes, nb_classes, type);
     kn.execute();
     notes.affiche();
 }
