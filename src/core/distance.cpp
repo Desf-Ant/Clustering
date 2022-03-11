@@ -27,7 +27,9 @@ double Distance::calcul ( const Sommet& A, const Sommet& B ) const
 
 double Distance::calculNote(const Note &A, const Note &B) const {
     switch (this->type) {
-    case EUCLIDIENNE : return this->calculEuclienneNote( A, B ); break;
+    case MANHATTAN   : return this->calculManhattanNote( A, B ) ; break;
+    case EUCLIDIENNE : return this->calculEuclidienneNote( A, B ); break;
+    case CHEBYSHEV   : return this->calculChebyshevNote( A, B ); break;
     default          : return Distance::INFINIE;
     }
 }
@@ -54,9 +56,29 @@ double Distance::calculCosinus ( const Sommet& A, const Sommet& B ) const
     return 1 - (A.getX()*B.getX()+A.getY()*B.getY()+A.getZ()*B.getZ())/(std::sqrt(std::pow(A.getX(),2)+std::pow(A.getY(),2)+std::pow(A.getZ(),2))*std::sqrt(std::pow(B.getX(),2)+std::pow(B.getY(),2)+std::pow(B.getZ(),2)));
 }
 
-double Distance::calculEuclienneNote(const Note &A, const Note &B) const {
+double Distance::calculEuclidienneNote(const Note &A, const Note &B) const {
     double distance = 0;
     for (int i=0; i<A.getSizeDimension();i++)
         distance += std::pow(A.getCoeffAt(i)-B.getCoeffAt(i),2);
     return std::sqrt(distance);
+}
+
+double Distance::calculManhattanNote (const Note &A, const Note &B) const
+{
+    double distance = 0;
+    for (int i=0; i<A.getSizeDimension();i++) {
+        distance += std::abs(B.getCoeffAt(i) - A.getCoeffAt(i) );
+    }
+    return distance;
+}
+
+double Distance::calculChebyshevNote (const Note &A, const Note &B) const
+{
+    double maxDist = 0;
+    for (int i=0; i<A.getSizeDimension(); i++) {
+        if (maxDist < B.getCoeffAt(i) - A.getCoeffAt(i)) {
+            maxDist = B.getCoeffAt(i) - A.getCoeffAt(i);
+        }
+    }
+    return maxDist;
 }
