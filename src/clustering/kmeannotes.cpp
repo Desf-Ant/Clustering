@@ -36,7 +36,10 @@ void KmeanNotes::initialise ( void )
     this->nb_sommets_par_classe.clear();
     for (int i = 0; i< (int)this->nb_classes;i++) {
         this->graines.push_back(Note::random(15));
-        this->centroids.push_back(Note(std::vector<double>({0,0,0,0,0,0,0,0,0,0,0,0,0,0,0})));
+        std::vector<double> zeros = std::vector<double>();
+        for (int i=0; i<this->lesDonnees->at(0).getSizeDimension();i++)
+            zeros.push_back(0);
+        this->centroids.push_back(Note(std::vector<double>(zeros)));
         this->nb_sommets_par_classe.push_back(0);
     }
 }
@@ -44,7 +47,10 @@ void KmeanNotes::initialise ( void )
 void KmeanNotes::attribueClasse ( void )
 {
     for (int i = 0; i< (int)this->nb_classes;i++) {
-        this->centroids.at(i)=Note(std::vector<double>({0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}));
+        std::vector<double> zeros = std::vector<double>();
+        for (int i=0; i<this->lesDonnees->at(0).getSizeDimension();i++)
+            zeros.push_back(0);
+        this->centroids.at(i)=Note(std::vector<double>(zeros));
         this->nb_sommets_par_classe.at(i)=0;
     }
     std::vector<double> d;

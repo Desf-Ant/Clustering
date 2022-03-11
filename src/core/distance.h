@@ -30,7 +30,9 @@ class Distance
         double calculChebyshev   ( const Sommet& A, const Sommet& B ) const;
         double calculCosinus     ( const Sommet& A, const Sommet& B ) const;
 
-        double calculEuclienneNote ( const Note& A, const Note& B ) const;
+        double calculManhattanNote   ( const Note& A, const Note& B ) const;
+        double calculEuclidienneNote ( const Note& A, const Note& B ) const;
+        double calculChebyshevNote   ( const Note& A, const Note& B ) const;
 };
 
 #endif // DISTANCE_H

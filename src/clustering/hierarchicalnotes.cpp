@@ -84,7 +84,10 @@ void HierarchicalNotes::fusionne ( void )
 }
 
 void HierarchicalNotes::calculeCentroid ( unsigned int n ) {
-    Note centro = Note({0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+    std::vector<double> zeros = std::vector<double>();
+    for (int i=0; i<this->lesDonnees->at(0).getSizeDimension();i++)
+        zeros.push_back(0);
+    Note centro = Note(zeros);
     for (int i=0; i<(int)this->liste_sommets_par_classe.at(n).size();i++){
         centro.ajoute(*(this->liste_sommets_par_classe.at(n).at(i)));
     }
