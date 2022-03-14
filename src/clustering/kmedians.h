@@ -4,6 +4,7 @@
 #include "../core/distance.h"
 #include "../core/sommet.h"
 #include "../core/donnees.h"
+#include <algorithm>
 
 class Kmedians
 {

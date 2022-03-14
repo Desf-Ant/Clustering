@@ -55,7 +55,7 @@ void Kmedians::attribueClasse ( void )
         for (int j = 0; j<(int)this->graines.size(); j++) {
             d.push_back(this->distance.calcul(this->lesDonnees->at(i), this->graines.at(j)));
         }
-        std::vector<double>::iterator result = std::min_element(std::begin(d), std::end(d));
+        std::vector<double>::iterator result = std::min(std::begin(d), std::end(d));
         int clas = std::distance(std::begin(d), result);
         this->nb_sommets_par_classe.at(clas) += 1;
         this->lesDonnees->at(i).setClasse(clas);
