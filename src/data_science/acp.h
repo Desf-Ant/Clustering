@@ -3,6 +3,8 @@
 
 #include "../core/note.h"
 #include "../core/notes.h"
+#include "../matrice/matrice.h"
+#include "../matrice/vecteur.h"
 
 class ACP
 {

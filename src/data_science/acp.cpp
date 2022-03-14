@@ -7,6 +7,7 @@ ACP::ACP (Notes* data){
 
 void ACP::execute (void){
     this->centreDonnees();
+    this->genere_matrice_covariance();
 }
 
 void ACP::centreDonnees (void){
@@ -33,27 +34,17 @@ void ACP::centreDonnees (void){
     Note invertCentroid = Note (invertCoords);
     for (int i=0; i<(int)this->lesDonnees.size();i++)
         this->lesDonnees.at(i).setTranslation(invertCentroid);
-
-
-    std::vector<double> zeross = std::vector<double>();
-    for (int i=0; i<(int)this->lesDonnees.at(0).getSizeDimension();i++)
-        zeross.push_back(0);
-    Note centroidd = Note (zeross);
-
-    for (int i=0; i<(int)this->lesDonnees.size();i++)
-        centroidd.ajoute(this->lesDonnees.at(i));
-
-    for (int i=0; i<(int)this->lesDonnees.at(0).getSizeDimension();i++)
-        zeross.at(i) = centroidd.getCoeffAt(i) / this->lesDonnees.size() ;
-
-    centroidd = Note(zeross);
-    std::cout << "centroids" <<std::endl;
-    centroidd.affiche();
-
 }
 
 void ACP::genere_matrice_covariance (void){
+    Matrice matrice = Matrice(this->lesDonnees.size(), this->lesDonnees.at(0).getSizeDimension());
+    for (int i=0; i<(int)matrice.getNbLignes(); i++)
+        for (int j=0; j<(int)matrice.getNbColonnes();j++)
+            matrice.setCoeff(i,j,this->lesDonneesOriginales->getNoteAt(i).getCoeffAt(j));
 
+   matrice.affiche();
+   Matrice transpose = matrice.getTranspose();
+   matrice = matrice * transpose;
 }
 
 void ACP::extraction_vecteurs_propres (void){

@@ -398,6 +398,14 @@ Vecteur Matrice::getVecteurPropre ( unsigned int n )
     return this->lesVecteursPropres.at(n);
 }
 
+Matrice Matrice::getTranspose() {
+    Matrice transpose = Matrice (this->getNbColonnes(), this->getNbLignes());
+    for (int j=0; j<(int)this->getNbColonnes();j++)
+        for (int i=0; i<(int)this->getNbLignes(); i++)
+            transpose.setCoeff(j,i,this->getCoeff(i,j));
+    return transpose;
+}
+
 Matrice operator* ( const Matrice& A, const Matrice& B )
 {
     if ( A.getNbColonnes() != B.getNbLignes() )

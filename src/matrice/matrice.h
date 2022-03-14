@@ -52,6 +52,7 @@ class Matrice
         float getValeurPropre ( unsigned int n );
         Matrice getMatriceVecteursPropres ( void );
         Vecteur getVecteurPropre ( unsigned int n );
+        Matrice getTranspose ( void );
 
     public :
         static Matrice identite ( unsigned int size );
