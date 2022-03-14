@@ -233,4 +233,6 @@ void MainWindow::openFile() {
     HierarchicalNotes kn = HierarchicalNotes(&notes, nb_classes, type);
     kn.execute();
     notes.affiche();
+    ACP acp = ACP(&notes);
+    acp.execute();
 }

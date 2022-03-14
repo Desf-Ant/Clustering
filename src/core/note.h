@@ -20,6 +20,8 @@ public:
     void ajoute ( const Note& autre );
     void affiche ( void ) const;
 
+    void setTranslation ( Note n );
+
     static Note random(int n);
 };
 

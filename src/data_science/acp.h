@@ -1,17 +1,17 @@
 #ifndef ACP_H
 #define ACP_H
 
-#include "../core/sommet.h"
-#include "../core/donnees.h"
+#include "../core/note.h"
+#include "../core/notes.h"
 
 class ACP
 {
     private :
-        Donnees* lesDonneesOriginales;
-        std::vector<Sommet> lesDonnees;
+        Notes* lesDonneesOriginales;
+        std::vector<Note> lesDonnees;
 
     public:
-        ACP (Donnees* data);
+        ACP (Notes* data);
         void execute (void);
 
 

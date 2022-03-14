@@ -13,6 +13,7 @@
 #include "../clustering/hierarchicalnotes.h"
 #include "../core/notes.h"
 #include "../core/note.h"
+#include "data_science/acp.h"
 
 #include <QMainWindow>
 #include <QGroupBox>

@@ -50,3 +50,8 @@ Note Note::random(int n) {
     }
     return Note(noteListe);
 }
+
+void Note::setTranslation ( Note n ) {
+    for (int i=0; i<this->getSizeDimension();i++)
+        this->dimensions.at(i) += n.getCoeffAt(i);
+}
