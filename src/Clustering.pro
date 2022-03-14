@@ -26,7 +26,9 @@ SOURCES += \
     core/main.cpp \
     core/sommet.cpp \
     gui/mainwindow.cpp \
-    gui/scene.cpp
+    gui/scene.cpp \
+    matrice/matrice.cpp \
+    matrice/vecteur.cpp \
 
 HEADERS += \
     clustering/dbscannote.h \
@@ -45,7 +47,9 @@ HEADERS += \
     core/donnees.h \
     core/sommet.h \
     gui/mainwindow.h \
-    gui/scene.h
+    gui/scene.h \
+    matrice/matrice.h \
+    matrice/vecteur.h \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
