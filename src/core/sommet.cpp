@@ -72,10 +72,10 @@ void Sommet::ajoute ( const Sommet& autre )
 
 Sommet Sommet::random2D ( void )
 {
-    return Sommet(arc4random() % 495 + 5,arc4random() % 495 + 5,0);
+    return Sommet(rand() % 495 + 5,rand() % 495 + 5,0);
 }
 
 Sommet Sommet::random3D ( void )
 {
-    return Sommet(arc4random() % 495 + 5,arc4random() % 495 + 5,arc4random() % 100 - 50);
+    return Sommet(rand() % 495 + 5,rand() % 495 + 5,rand() % 100 - 50);
 }

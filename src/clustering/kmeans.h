@@ -4,6 +4,8 @@
 #include "../core/distance.h"
 #include "../core/sommet.h"
 #include "../core/donnees.h"
+#include <iostream>
+#include <algorithm>
 
 class Kmeans
 {

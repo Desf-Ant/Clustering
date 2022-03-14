@@ -7,6 +7,7 @@
 #include <vector>
 #include <assert.h>
 #include <iostream>
+#include <algorithm>
 
 class Donnees
 {

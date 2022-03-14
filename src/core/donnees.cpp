@@ -70,12 +70,12 @@ void Donnees::genere_eparpilles( void )
 
 void Donnees::genere_carre( void )
 {
-    int xRect = arc4random () %490 + 5;
-    int yRect = arc4random () %490 + 5;
-    int widht = arc4random () %100 + 50;
-    double angle = arc4random() % 360 + 0;
+    int xRect = rand () %490 + 5;
+    int yRect = rand () %490 + 5;
+    int widht = rand () %100 + 50;
+    double angle = rand() % 360 + 0;
     while ( xRect+widht > 490 || yRect+widht > 490)
-        widht = arc4random () %490 + 5;
+        widht = rand () %490 + 5;
 
     for (int i = 0; i<(int)this->nb_donnees; i++) {
         Sommet s;
@@ -93,19 +93,19 @@ void Donnees::genere_carre( void )
 
 void Donnees::genere_rectangle( void )
 {
-    int xRect = arc4random () %490 + 5;
-    int yRect = arc4random () %490 + 5;
-    int zRect = arc4random() %100 - 50;
-    int widht = arc4random () %100 + 50;
-    int height = arc4random() % 100 + 50;
-    int deep = arc4random() % 75;
-    double angle = arc4random() % 360 + 0;
-    while ( xRect+widht > 490 )
-        widht = arc4random () %490 + 5;
-    while ( yRect+height > 490 )
-        height = arc4random() % 490 + 5;
-    while ( zRect+deep > 50 )
-        deep = arc4random() % 75;
+    int xRect = rand () %490 + 5;
+    int yRect = rand () %490 + 5;
+    int zRect = rand() %100 - 50;
+    int widht = rand () %100 + 50;
+    int height = rand() % 100 + 50;
+    int deep = rand() % 75;
+    double angle = rand() % 360 + 0;
+    while (xRect+widht > 490)
+        widht = rand () %490 + 5;
+    while (yRect+height > 490)
+        height = rand() % 490 + 5;
+    while (zRect+deep > 50)
+        deep = rand() % 75;
 
     for (int i = 0; i<(int)this->nb_donnees; i++) {
         Sommet s;
@@ -123,9 +123,9 @@ void Donnees::genere_rectangle( void )
 
 void Donnees::genere_disque (void )
 {
-    int xRect = arc4random () %495 + 5;
-    int yRect = arc4random () %495 + 5;
-    int radius = arc4random () % 250 + 5;
+    int xRect = rand () %495 + 5;
+    int yRect = rand () %495 + 5;
+    int radius = rand () % 250 + 5;
     Sommet centre = Sommet(xRect,yRect,0);
     Distance d = Distance(this->type);
 
@@ -142,16 +142,16 @@ void Donnees::genere_disque (void )
 
 void Donnees::genere_ellipse ( void )
 {
-    int xRect = arc4random () %495 + 5;
-    int yRect = arc4random() %495 + 5;
-    int h = arc4random () % 250 + 5;
-    int k = arc4random () %250 + 5;
-    double angle = arc4random() % 360;
+    int xRect = rand () %495 + 5;
+    int yRect = rand() %495 + 5;
+    int h = rand () % 250 + 5;
+    int k = rand () %250 + 5;
+    double angle = rand() % 360;
 
     while (xRect + h/2 > 495)
-        h = arc4random () % 250 + 5;
+        h = rand () % 250 + 5;
     while (yRect + k/2 > 495)
-        k = arc4random () % 250 + 5;
+        k = rand () % 250 + 5;
 
     for (int i = 0; i<(int)this->nb_donnees; i++) {
         Sommet s;
