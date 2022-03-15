@@ -1,19 +1,19 @@
-#ifndef ACP_H
-#define ACP_H
+#ifndef ACPNOTES_H
+#define ACPNOTES_H
 
-#include "../core/sommet.h"
-#include "../core/donnees.h"
+#include "../core/note.h"
+#include "../core/notes.h"
 #include "../matrice/matrice.h"
 #include "../matrice/vecteur.h"
 
-class ACP
+class ACPNotes
 {
     private :
-        Donnees* lesDonneesOriginales;
-        std::vector<Sommet> lesDonnees;
+        Notes* lesDonneesOriginales;
+        std::vector<Note> lesDonnees;
 
     public:
-        ACP (Donnees* data);
+        ACPNotes (Notes* data);
         void execute (void);
 
 
@@ -23,4 +23,4 @@ class ACP
         void extraction_vecteurs_propres (void);
 };
 
-#endif // ACP_H
+#endif // ACPNOTES_H

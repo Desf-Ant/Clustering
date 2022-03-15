@@ -1,6 +1,6 @@
 #include "acp.h"
 
-ACP::ACP (Notes* data){
+ACP::ACP(Donnees* data){
     this->lesDonneesOriginales = data;
     this->lesDonnees = *(data->getDonnees());
 }
@@ -12,35 +12,27 @@ void ACP::execute (void){
 
 void ACP::centreDonnees (void){
     // calcul du centroid
-    std::vector<double> zeros = std::vector<double>();
-    for (int i=0; i<(int)this->lesDonnees.at(0).getSizeDimension();i++)
-        zeros.push_back(0);
-    Note centroid = Note (zeros);
+    Sommet centroid = Sommet(0,0,0);
 
     for (int i=0; i<(int)this->lesDonnees.size();i++)
         centroid.ajoute(this->lesDonnees.at(i));
-
-    for (int i=0; i<(int)this->lesDonnees.at(0).getSizeDimension();i++)
-        zeros.at(i) = centroid.getCoeffAt(i) / this->lesDonnees.size() ;
-
-    centroid = Note(zeros);
-    std::cout << "centroids" <<std::endl;
-    centroid.affiche();
+    centroid = Sommet(centroid.getX()/this->lesDonnees.size(), centroid.getY()/this->lesDonnees.size(), centroid.getZ()/this->lesDonnees.size());
 
     //translation de toutes les données par l'opposé du centroid
-    std::vector<double> invertCoords = std::vector<double>();
-    for (int i=0; i<(int)centroid.getSizeDimension();i++)
-        invertCoords.push_back(-centroid.getCoeffAt(i));
-    Note invertCentroid = Note (invertCoords);
+    Sommet invertCentroid = Sommet(centroid);
+    invertCentroid.setScale(-1,-1,-1);
+
     for (int i=0; i<(int)this->lesDonnees.size();i++)
-        this->lesDonnees.at(i).setTranslation(invertCentroid);
+        this->lesDonnees.at(i).setTranslation(invertCentroid.getX(), invertCentroid.getY(), invertCentroid.getZ());
 }
 
 void ACP::genere_matrice_covariance (void){
-    Matrice matrice = Matrice(this->lesDonnees.size(), this->lesDonnees.at(0).getSizeDimension());
-    for (int i=0; i<(int)matrice.getNbLignes(); i++)
-        for (int j=0; j<(int)matrice.getNbColonnes();j++)
-            matrice.setCoeff(i,j,this->lesDonneesOriginales->getNoteAt(i).getCoeffAt(j));
+    Matrice matrice = Matrice(this->lesDonnees.size(), 3);
+    for (int i=0; i<(int)matrice.getNbLignes(); i++) {
+        matrice.setCoeff(i,0,this->lesDonneesOriginales->getDonnees()->at(i).getX());
+        matrice.setCoeff(i,1,this->lesDonneesOriginales->getDonnees()->at(i).getY());
+        matrice.setCoeff(i,2,this->lesDonneesOriginales->getDonnees()->at(i).getZ());
+    }
 
    matrice.affiche();
    Matrice transpose = matrice.getTranspose();
@@ -50,5 +42,3 @@ void ACP::genere_matrice_covariance (void){
 void ACP::extraction_vecteurs_propres (void){
 
 }
-
-
