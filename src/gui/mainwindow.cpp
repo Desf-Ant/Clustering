@@ -117,6 +117,7 @@ void MainWindow::init_slots ( void )
     connect ( this->bouton_2D, SIGNAL(clicked()), this, SLOT(clic_2D()) );
     connect ( this->bouton_3D, SIGNAL(clicked()), this, SLOT(clic_3D()) );
     connect ( this->openShortcut, SIGNAL(activated()), this, SLOT(openFile()) );
+    connect ( this->bouton_acp, SIGNAL(clicked()), this, SLOT(clic_acp()) );
 }
 
 MainWindow::~MainWindow()
@@ -195,6 +196,12 @@ void MainWindow::clic_dbscan ( void )
     this->scene->recharge();
 }
 
+void MainWindow::clic_acp() {
+    ACP acp = ACP(this->donnees);
+    acp.execute();
+    this->scene->recharge();
+}
+
 void MainWindow::clic_2D ( void )
 {
     this->bouton_2D->setChecked(true);
@@ -232,7 +239,7 @@ void MainWindow::openFile() {
     type_dist type = (type_dist)(this->choix_distance->currentIndex());
     HierarchicalNotes kn = HierarchicalNotes(&notes, nb_classes, type);
     kn.execute();
-    notes.affiche();
-    ACP acp = ACP(&notes);
+    //notes.affiche();
+    ACPNotes acp = ACPNotes(&notes);
     acp.execute();
 }

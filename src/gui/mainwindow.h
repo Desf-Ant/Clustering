@@ -13,7 +13,8 @@
 #include "../clustering/hierarchicalnotes.h"
 #include "../core/notes.h"
 #include "../core/note.h"
-#include "data_science/acpNotes.h"
+#include "../data_science/acpNotes.h"
+#include "../data_science/acp.h"
 
 #include <QMainWindow>
 #include <QGroupBox>
@@ -93,6 +94,7 @@ class MainWindow : public QMainWindow
         void clic_PAM ( void );
         void clic_hierarchical ( void );
         void clic_dbscan ( void );
+        void clic_acp( void );
         void clic_2D ( void );
         void clic_3D ( void );
         void openFile( void );

@@ -8,6 +8,7 @@ ACP::ACP(Donnees* data){
 void ACP::execute (void){
     this->centreDonnees();
     this->genere_matrice_covariance();
+    this->extraction_vecteurs_propres();
 }
 
 void ACP::centreDonnees (void){
@@ -27,18 +28,23 @@ void ACP::centreDonnees (void){
 }
 
 void ACP::genere_matrice_covariance (void){
-    Matrice matrice = Matrice(this->lesDonnees.size(), 3);
-    for (int i=0; i<(int)matrice.getNbLignes(); i++) {
-        matrice.setCoeff(i,0,this->lesDonneesOriginales->getDonnees()->at(i).getX());
-        matrice.setCoeff(i,1,this->lesDonneesOriginales->getDonnees()->at(i).getY());
-        matrice.setCoeff(i,2,this->lesDonneesOriginales->getDonnees()->at(i).getZ());
+    Matrice* matrice = new Matrice(this->lesDonnees.size(), 3);
+    for (int i=0; i<(int)matrice->getNbLignes(); i++) {
+        matrice->setCoeff(i,0,this->lesDonneesOriginales->getDonnees()->at(i).getX());
+        matrice->setCoeff(i,1,this->lesDonneesOriginales->getDonnees()->at(i).getY());
+        matrice->setCoeff(i,2,this->lesDonneesOriginales->getDonnees()->at(i).getZ());
     }
 
-   matrice.affiche();
-   Matrice transpose = matrice.getTranspose();
-   matrice = matrice * transpose;
+    matrice->affiche();
+    Matrice* transpose = new Matrice(matrice->getTranspose());
+    matrice = new Matrice(*matrice * (*transpose));
+    this->covariance = matrice;
 }
 
 void ACP::extraction_vecteurs_propres (void){
-
+    this->covariance->eigenAnalysis();
+    std::cout << "vecteur propre" << std::endl;
+    this->covariance->getVecteurPropre(0).affiche();
+    this->covariance->getVecteurPropre(1).affiche();
+    std::cout << "valeurs propres " << this->covariance->getValeurPropre(0) << " " << this->covariance->getValeurPropre(1) << std::endl;
 }

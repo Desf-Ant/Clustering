@@ -8,6 +8,7 @@ ACPNotes::ACPNotes (Notes* data){
 void ACPNotes::execute (void){
     this->centreDonnees();
     this->genere_matrice_covariance();
+    this->extraction_vecteurs_propres();
 }
 
 void ACPNotes::centreDonnees (void){
@@ -37,18 +38,26 @@ void ACPNotes::centreDonnees (void){
 }
 
 void ACPNotes::genere_matrice_covariance (void){
-    Matrice matrice = Matrice(this->lesDonnees.size(), this->lesDonnees.at(0).getSizeDimension());
-    for (int i=0; i<(int)matrice.getNbLignes(); i++)
-        for (int j=0; j<(int)matrice.getNbColonnes();j++)
-            matrice.setCoeff(i,j,this->lesDonneesOriginales->getNoteAt(i).getCoeffAt(j));
+    Matrice* matrice = new Matrice(this->lesDonnees.size(), this->lesDonnees.at(0).getSizeDimension());
+    for (int i=0; i<(int)matrice->getNbLignes(); i++)
+        for (int j=0; j<(int)matrice->getNbColonnes();j++)
+            matrice->setCoeff(i,j,this->lesDonneesOriginales->getNoteAt(i).getCoeffAt(j));
 
-   matrice.affiche();
-   Matrice transpose = matrice.getTranspose();
-   matrice = matrice * transpose;
+   matrice->affiche();
+   Matrice* transpose = new Matrice(matrice->getTranspose());
+   matrice = new Matrice(*matrice * (*transpose));
+   this->covariance = matrice;
 }
 
 void ACPNotes::extraction_vecteurs_propres (void){
-
+    std::cout << "wola transpose " << this->covariance->getNbLignes() << " " << this->covariance->getNbColonnes()<< std::endl;
+    this->covariance->eigenAnalysis();
+    //this->covariance->affiche();
+    std::cout << "vecteur propre" << std::endl;
+//    this->covariance->getVecteurPropre(0).affiche();
+//    this->covariance->getVecteurPropre(1).affiche();
+    this->covariance->getMatriceVecteursPropres().affiche();
+    std::cout << "valeurs propres " << this->covariance->getValeurPropre(0) << " " << this->covariance->getValeurPropre(1) << std::endl;
 }
 
 

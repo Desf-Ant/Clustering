@@ -277,23 +277,9 @@ void Matrice::eigenAnalysis ( void )
 
     // Calcul de la paire propre la plus grande
     Matrice copieM = *this;
-    /*Vecteur vect = copieM.powerIteration();
-
-    double value = copieM.calculValeurPropreAssociee(vect);
-    this->lesValeursPropres.push_back(value);
-    Vecteur vecPropreMax = copieM.getVecteurValeursPropres();
-    this->lesVecteursPropres.push_back(vecPropreMax);
-
-    double norme = vecPropreMax.getNorme();
-    double ln = (value / (norme*norme));
-    Matrice tens = this->tensoriel(vecPropreMax, vecPropreMax);
-
-    Matrice Mprime = (copieM) - (ln * this->tensoriel(vecPropreMax, vecPropreMax));
-    Mprime.affiche();
-    */
 
     // Recherche des autres paires
-    for (int i=0; i < copieM.getNbLignes(); i++){
+    for (int i=0; i < (int)copieM.getNbLignes(); i++){
         Vecteur vect = copieM.powerIteration();
 
         double value = copieM.calculValeurPropreAssociee(vect);
@@ -309,14 +295,14 @@ void Matrice::eigenAnalysis ( void )
 
         copieM = Mprime;
 
-        Mprime.affiche();
+        //Mprime.affiche();
 
     }
 
-    for (int i=0; i < copieM.getNbLignes(); i++){
+    for (int i=0; i < (int)copieM.getNbLignes(); i++){
         this->lesValeursPropres.at(i) = abs(this->lesValeursPropres.at(i));
-        std::cout << this->lesValeursPropres.at(i) << std::endl;
-        this->lesVecteursPropres.at(i).affiche();
+        //std::cout << this->lesValeursPropres.at(i) << std::endl;
+        //this->lesVecteursPropres.at(i).affiche();
     }
 
     std::sort(this->lesValeursPropres.begin(),this->lesValeursPropres.end());
@@ -331,12 +317,12 @@ void Matrice::eigenAnalysis ( void )
     // Itération inverse pour la paire propre la plus proche de zéro
 
     double valPropreMini = this->lesValeursPropres.at(0);
-    std::cout << "la valeur propre mini en abs est " << valPropreMini << std::endl;
+    //std::cout << "la valeur propre mini en abs est " << valPropreMini << std::endl;
 
     // Vérification que toutes les paires ont été trouvés et sinon valeur propre = 0 et vecteur propre est nul
     if ( this->lesValeursPropres.size() < this->getNbLignes() )
     {
-        std::cout << "Toutes les paires propres n'ont pas ete trouvees !" << std::endl;
+        //std::cout << "Toutes les paires propres n'ont pas ete trouvees !" << std::endl;
         while ( this->lesValeursPropres.size() < this->getNbLignes() )
         {
             this->lesValeursPropres.push_back( 0.0 );

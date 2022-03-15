@@ -11,6 +11,7 @@ class ACPNotes
     private :
         Notes* lesDonneesOriginales;
         std::vector<Note> lesDonnees;
+        Matrice* covariance;
 
     public:
         ACPNotes (Notes* data);

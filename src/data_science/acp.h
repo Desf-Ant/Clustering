@@ -11,6 +11,7 @@ class ACP
     private :
         Donnees* lesDonneesOriginales;
         std::vector<Sommet> lesDonnees;
+        Matrice* covariance;
 
     public:
         ACP (Donnees* data);
