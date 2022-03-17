@@ -31,7 +31,7 @@ void KmedianNotes::initialise ( void )
 void KmedianNotes::execute ( void )
 {
     this->lesDonnees = this->donnees->getDonnees();
-//    this->donnees->getGraines()->clear();
+    this->donnees->getGraines()->clear();
     this->initialise();
 
     do {
@@ -40,7 +40,7 @@ void KmedianNotes::execute ( void )
 
     for (int i = 0; i<(int)this->graines.size(); i++) {
         this->graines.at(i).setClasse(i);
-//        this->donnees->getGraines()->push_back(this->graines.at(i));
+        this->donnees->getGraines()->push_back(this->graines.at(i));
     }
 }
 
@@ -59,8 +59,7 @@ void KmedianNotes::attribueClasse ( void )
         for (int j = 0; j<(int)this->graines.size(); j++) {
             d.push_back(this->distance.calculNote(this->lesDonnees->at(i), this->graines.at(j)));
         }
-        std::vector<double>::iterator result = std::min_element(std::begin(d), std::end(d));
-        int clas = std::distance(std::begin(d), result);
+        int clas = std::min_element(d.begin(),d.end()) - d.begin();
         this->nb_sommets_par_classe.at(clas) += 1;
         this->lesDonnees->at(i).setClasse(clas);
         for (int j=0; j<this->lesDonnees->at(0).getSizeDimension();j++)

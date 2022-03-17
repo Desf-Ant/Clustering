@@ -229,17 +229,24 @@ void MainWindow::openFile() {
         QStringList liste = line.split(";");
         std::vector< double> listeNote = std::vector< double >();
         for (int i=0; i<(int)liste.size();i++) {
+            if (liste.at(i) == "")
+                listeNote.push_back(-2);
             listeNote.push_back(liste.at(i).toDouble());
         }
         notes.addNote(Note(listeNote));
     }
     file.close();
 
-    unsigned int nb_classes = this->choix_nb_classes->value();
-    type_dist type = (type_dist)(this->choix_distance->currentIndex());
-    HierarchicalNotes kn = HierarchicalNotes(&notes, nb_classes, type);
-    kn.execute();
     //notes.affiche();
-    ACPNotes acp = ACPNotes(&notes);
-    acp.execute();
+
+//    unsigned int nb_classes = this->choix_nb_classes->value();
+//    type_dist type = (type_dist)(this->choix_distance->currentIndex());
+//    HierarchicalNotes kn = HierarchicalNotes(&notes, nb_classes, type);
+//    kn.execute();
+
+    AnalyseCleanData acd = AnalyseCleanData(&notes);
+    acd.execute();
+
+//    ACPNotes acp = ACPNotes(&notes);
+//    acp.execute();
 }

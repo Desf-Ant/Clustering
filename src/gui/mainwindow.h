@@ -15,6 +15,7 @@
 #include "../core/note.h"
 #include "../data_science/acpNotes.h"
 #include "../data_science/acp.h"
+#include "../data_science/analysecleandata.h"
 
 #include <QMainWindow>
 #include <QGroupBox>

@@ -15,9 +15,13 @@ std::vector< Note >* Notes::getDonnees () const {
 }
 
 Note Notes::getNoteAt(int index) const {
-    if (index <= 0 || index >= (int)this->allNotes->size() )
+    if (index < 0 || index >= (int)this->allNotes->size() )
         return Note();
     return this->allNotes->at(index);
+}
+
+std::vector<Note>* Notes::getGraines() const {
+    return this->graines;
 }
 
 void Notes::affiche() const {

@@ -45,19 +45,27 @@ void ACPNotes::genere_matrice_covariance (void){
 
    matrice->affiche();
    Matrice* transpose = new Matrice(matrice->getTranspose());
-   matrice = new Matrice(*matrice * (*transpose));
+   matrice = new Matrice((*transpose)* (*matrice));
    this->covariance = matrice;
 }
 
 void ACPNotes::extraction_vecteurs_propres (void){
-    std::cout << "wola transpose " << this->covariance->getNbLignes() << " " << this->covariance->getNbColonnes()<< std::endl;
+    std::cout << "covariance " << std::endl;
+    this->covariance->affiche();
     this->covariance->eigenAnalysis();
-    //this->covariance->affiche();
-    std::cout << "vecteur propre" << std::endl;
-//    this->covariance->getVecteurPropre(0).affiche();
-//    this->covariance->getVecteurPropre(1).affiche();
-    this->covariance->getMatriceVecteursPropres().affiche();
-    std::cout << "valeurs propres " << this->covariance->getValeurPropre(0) << " " << this->covariance->getValeurPropre(1) << std::endl;
+    for ( unsigned int i = 0 ; i < covariance->getNbLignes() ; i++ )
+    {
+        Vecteur produit = covariance->getValeurPropre(i) * covariance->getVecteurPropre(i);
+        Vecteur transfo = *covariance * covariance->getVecteurPropre(i);
+
+        std::cout << "(produit) " << covariance->getValeurPropre(i) << " -> ";
+        produit.affiche();
+        std::cout << "(transfo) " <<  covariance->getValeurPropre(i) << " -> ";
+        transfo.affiche();
+        std::cout << std::endl;
+    }
+//    this->covariance->getMatriceVecteursPropres().affiche();
+//    std::cout << "valeurs propres " << this->covariance->getValeurPropre(0) << " " << this->covariance->getValeurPropre(1) << std::endl;
 }
 
 

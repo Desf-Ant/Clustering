@@ -1,10 +1,16 @@
-#include "Note.h"
+#include "note.h"
 
 Note::Note()
 {
     this->dimensions = std::vector < double >() ;
     this->classe = -1;
 }
+
+//Note::Note(Note& n) {
+//    for (int i=0; i<(int)n.getSizeDimension();i++)
+//        this->dimensions.push_back(n.getCoeffAt(i));
+//    this->classe = n.getClasse();
+//}
 
 Note::Note(std::vector<double> dimensions) {
     this->dimensions = dimensions;

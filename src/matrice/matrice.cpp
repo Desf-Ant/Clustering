@@ -285,13 +285,15 @@ void Matrice::eigenAnalysis ( void )
         double value = copieM.calculValeurPropreAssociee(vect);
         this->lesValeursPropres.push_back(value);
         Vecteur vecPropreMax = copieM.getVecteurValeursPropres();
-        this->lesVecteursPropres.push_back(vecPropreMax);
-
+        this->lesVecteursPropres.push_back(vect);
+//        this->lesVecteursPropres.push_back(vecPropreMax);
+        // askip pour val calcul val propre avec o-power ensuite tu fais calcul valeur propre associé avec le val propre que tu viens de calculer
         double norme = vecPropreMax.getNorme();
         double ln = (value / (norme*norme));
-        Matrice tens = this->tensoriel(vecPropreMax, vecPropreMax);
+        Matrice tens = this->tensoriel(vect, vect);
 
-        Matrice Mprime = (copieM) - (ln * this->tensoriel(vecPropreMax, vecPropreMax));
+        //Matrice Mprime = (copieM) - (ln * this->tensoriel(vecPropreMax, vecPropreMax)); // vect propre
+        Matrice Mprime = (copieM) - (ln * this->tensoriel(vect, vect));
 
         copieM = Mprime;
 

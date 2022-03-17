@@ -9,11 +9,13 @@ class Notes
 {
 private :
     std::vector < Note >* allNotes;
+    std::vector < Note >* graines;
 public:
     Notes();
     void addNote ( Note n );
     Note getNoteAt( int index ) const;
     std::vector < Note >* getDonnees( void ) const;
+    std::vector < Note >* getGraines( void ) const;
 
     void affiche ( void ) const;
 };

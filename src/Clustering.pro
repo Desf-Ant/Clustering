@@ -26,6 +26,7 @@ SOURCES += \
     core/sommet.cpp \
     data_science/acp.cpp \
     data_science/acpNotes.cpp \
+    data_science/analysecleandata.cpp \
     gui/mainwindow.cpp \
     gui/scene.cpp \
     matrice/matrice.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     core/sommet.h \
     data_science/acp.h \
     data_science/acpNotes.h \
+    data_science/analysecleandata.h \
     gui/mainwindow.h \
     gui/scene.h \
     matrice/matrice.h \
