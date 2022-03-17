@@ -5,6 +5,10 @@ Notes::Notes()
     this->allNotes = new std::vector < Note >();
 }
 
+Notes::Notes(std::vector <Note>* n) {
+    this->allNotes = n;
+}
+
 
 void Notes::addNote(Note n) {
     this->allNotes->push_back(n);

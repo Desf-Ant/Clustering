@@ -14,7 +14,6 @@ KmedianNotes::KmedianNotes( Notes* d, unsigned int n, type_dist t )
 
 void KmedianNotes::initialise ( void )
 {
-    this->graines.clear();
     this->nb_sommets_par_classe.clear();
 
     for (int i=0; i<this->lesDonnees->at(0).getSizeDimension();i++)
@@ -31,7 +30,6 @@ void KmedianNotes::initialise ( void )
 void KmedianNotes::execute ( void )
 {
     this->lesDonnees = this->donnees->getDonnees();
-    this->donnees->getGraines()->clear();
     this->initialise();
 
     do {
@@ -40,7 +38,6 @@ void KmedianNotes::execute ( void )
 
     for (int i = 0; i<(int)this->graines.size(); i++) {
         this->graines.at(i).setClasse(i);
-        this->donnees->getGraines()->push_back(this->graines.at(i));
     }
 }
 

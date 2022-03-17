@@ -15,6 +15,7 @@ public:
     std::vector < Note >* execute ( void );
     void cleanData( void );
     void removeLine ( int n );
+    void removeColonne ( int n );
     void ligneVariance ( void );
     void colonneVariance ( void );
 };

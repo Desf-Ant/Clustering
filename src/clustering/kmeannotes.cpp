@@ -16,7 +16,6 @@ KmeanNotes::KmeanNotes ( Notes* d, unsigned int n, type_dist t )
 void KmeanNotes::execute ( void )
 {
     this->lesDonnees = this->donnees->getDonnees();
-    this->donnees->getGraines()->clear();
     this->initialise();
 
     do {
@@ -25,7 +24,6 @@ void KmeanNotes::execute ( void )
 
     for (int i = 0; i<(int)this->graines.size(); i++) {
         this->graines.at(i).setClasse(i);
-        this->donnees->getGraines()->push_back(this->graines.at(i));
     }
 }
 

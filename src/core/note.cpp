@@ -6,12 +6,6 @@ Note::Note()
     this->classe = -1;
 }
 
-//Note::Note(Note& n) {
-//    for (int i=0; i<(int)n.getSizeDimension();i++)
-//        this->dimensions.push_back(n.getCoeffAt(i));
-//    this->classe = n.getClasse();
-//}
-
 Note::Note(std::vector<double> dimensions) {
     this->dimensions = dimensions;
     this->classe = -1;
@@ -29,6 +23,14 @@ double Note::getCoeffAt(int index) const {
     if (index < 0 || index >= this->getSizeDimension())
         return -1;
     return this->dimensions.at(index);
+}
+
+void Note::removeCoeff(int n) {
+    std::vector < double > newDimensions = std::vector < double >();
+    for (int i=0; i<this->getSizeDimension();i++)
+        if (i != n)
+            newDimensions.push_back(this->getCoeffAt(i));
+    this->dimensions = newDimensions;
 }
 
 void Note::setClasse(int n) {

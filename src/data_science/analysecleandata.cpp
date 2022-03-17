@@ -9,15 +9,16 @@ AnalyseCleanData::AnalyseCleanData(Notes* data)
 }
 
 std::vector < Note >* AnalyseCleanData::execute () {
+    std::cout << "taille de la base de données avant le nettoyage (" << this->lesDonnees->size() << " x " << this->lesDonnees->at(0).getSizeDimension() << ")" << std::endl << std::endl;
     this->cleanData();
     this->ligneVariance();
     this->colonneVariance();
-    std::cout << "taille apres clean " << this->lesDonnees->size() << std::endl;
+    std::cout << "taille de la base de données apres le nettoyage (" << this->lesDonnees->size() << " x " << this->lesDonnees->at(0).getSizeDimension() << ")" << std::endl << std::endl;
     return this->lesDonnees;
 }
 
 void AnalyseCleanData::ligneVariance() {
-    std::vector < int > faibleVariance;
+    std::vector < int > indexFaibleVariance;
     for (int i=0; i<(int)this->lesDonnees->size();i++) {
         double variance = 0;
         double moyenne = 0;
@@ -34,20 +35,19 @@ void AnalyseCleanData::ligneVariance() {
         variance /= this->lesDonnees->at(i).getSizeDimension();
 
         if (variance <= 1.5) {
-            faibleVariance.push_back(i);
+            indexFaibleVariance.push_back(i);
             std::cout << "l'élève a l'index " << i << " a variance de " << variance << " ce n'est pas suffisant" << std::endl;
         }
     }
 
-    std::sort(faibleVariance.begin(), faibleVariance.end(), std::greater<int>());
-    for (int i=0; i<(int)faibleVariance.size(); i++) {
-        std::cout << " variance index ligne " << faibleVariance.at(i) << std::endl;
-        this->removeLine(faibleVariance.at(i));
+    std::sort(indexFaibleVariance.begin(), indexFaibleVariance.end(), std::greater<int>());
+    for (int i=0; i<(int)indexFaibleVariance.size(); i++) {
+        this->removeLine(indexFaibleVariance.at(i));
     }
 }
 
 void AnalyseCleanData::colonneVariance() {
-    std::vector < int > faibleVariance;
+    std::vector < int > indexFaibleVariance;
     for (int j=0; j<(int)this->lesDonnees->at(0).getSizeDimension();j++) {
         double variance = 0;
         double moyenne = 0;
@@ -63,24 +63,29 @@ void AnalyseCleanData::colonneVariance() {
         }
         variance /= this->lesDonnees->size();
 
-        if (variance <= 3) {
-            faibleVariance.push_back(j);
-            std::cout << "la moyenne a l'index " << j << " a variance de " << variance << " ce n'est pas suffisant" << std::endl;
+        if (variance <= 2.5) {
+            indexFaibleVariance.push_back(j);
+            std::cout << "la matière a l'index " << j << " a variance de " << variance << " ce n'est pas suffisant" << std::endl;
         }
     }
 
-//    std::sort(faibleVariance.begin(), faibleVariance.end(), std::greater<int>());
-//    for (int i=0; i<(int)faibleVariance.size(); i++) {
-//        std::cout << " variance index colonne " << faibleVariance.at(i) << std::endl;
-//        this->removeLine(faibleVariance.at(i));
-//    }
+    std::sort(indexFaibleVariance.begin(), indexFaibleVariance.end(), std::greater<int>());
+    for (int i=0; i<(int)indexFaibleVariance.size(); i++) {
+        this->removeColonne(indexFaibleVariance.at(i));
+    }
 }
 
 void AnalyseCleanData::removeLine(int n) {
-//    std::vector<Note>::iterator it = this->lesDonnees->begin();
-//    std::advance(it, n*sizeof (Note));
-//    this->lesDonnees->erase(it);
-    this->lesDonnees->erase(std::find(this->lesDonnees->begin(), this->lesDonnees->end(), (Note)this->lesDonnees->at(n)));
+    std::vector < Note >* newLesDonnees = new std::vector < Note >;
+    for (int i=0; i<(int)this->lesDonnees->size(); i++)
+        if (i != n)
+            newLesDonnees->push_back(this->lesDonnees->at(i));
+    this->lesDonnees = newLesDonnees;
+}
+
+void AnalyseCleanData::removeColonne(int n) {
+    for (int i=0; i<(int)this->lesDonnees->size(); i++)
+        this->lesDonnees->at(i).removeCoeff(n);
 }
 
 void AnalyseCleanData::cleanData() {
@@ -97,5 +102,5 @@ void AnalyseCleanData::cleanData() {
     std::sort(indexSupp.begin(), indexSupp.end(), std::greater<int>());
 
     for (int i=0; i<(int)indexSupp.size();i++)
-       this->removeLine(i);
+       this->removeLine(indexSupp.at(i));
 }

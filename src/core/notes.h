@@ -12,6 +12,7 @@ private :
     std::vector < Note >* graines;
 public:
     Notes();
+    Notes(std::vector <Note>* n);
     void addNote ( Note n );
     Note getNoteAt( int index ) const;
     std::vector < Note >* getDonnees( void ) const;

@@ -170,9 +170,8 @@ Vecteur Matrice::powerIteration ( void )
     // Power iteration pour le calcul de la plus grande valeur propre
     // M.vect = lambda.vect
     Vecteur v = Vecteur(this->getNbLignes());
-    for (int i=0; i<(int)v.getTaille();i++) {
-        v.setCoeff(i, rand()%100);
-    }
+    v.setCoeff(0,1);
+
     Vecteur vold = Vecteur(v);
     for (int i=0; i < 100; i++) {
         v = *this*v;
@@ -181,7 +180,6 @@ Vecteur Matrice::powerIteration ( void )
             break;
         }
         vold = Vecteur(v);
-
     }
     return v;
 }
@@ -191,14 +189,17 @@ double Matrice::calculValeurPropreAssociee ( Vecteur v )
     // Trouve la valeur propre associée au vecteur v par division
     Vecteur vect_l = Vecteur(this->getNbLignes());
     double valeur = 0;
-    this->lesValeursPropres.clear();
-    vect_l = *this*v;
+    vect_l = (*this)*v;
     for (int i=0; i <(int)v.getTaille(); i++){
-        valeur = vect_l.getCoeff(i) / v.getCoeff(i);
-        this->lesValeursPropres.push_back(valeur);
+//        std::cout<< "calcul : " << vect_l.getCoeff(i)/v.getCoeff(i) << std::endl;
+        valeur += vect_l.getCoeff(i)/v.getCoeff(i) ;
         // std::cout << valeur << std::endl;
     }
-    return valeur;
+//    std::cout << "valeur :" << valeur<<std::endl;
+//    vect_l.affiche();
+//    v.affiche();
+//    std::cout << std::endl;
+    return valeur/vect_l.getTaille();
 }
 
 void Matrice::ordonneValeurPropre ( void )
@@ -276,55 +277,27 @@ void Matrice::eigenAnalysis ( void )
     this->lesValeursPropres.clear();
 
     // Calcul de la paire propre la plus grande
-    Matrice copieM = *this;
+    Matrice copieM = Matrice(*this);
 
     // Recherche des autres paires
     for (int i=0; i < (int)copieM.getNbLignes(); i++){
         Vecteur vect = copieM.powerIteration();
-
-        double value = copieM.calculValeurPropreAssociee(vect);
-        this->lesValeursPropres.push_back(value);
-        Vecteur vecPropreMax = copieM.getVecteurValeursPropres();
         this->lesVecteursPropres.push_back(vect);
-//        this->lesVecteursPropres.push_back(vecPropreMax);
-        // askip pour val calcul val propre avec o-power ensuite tu fais calcul valeur propre associé avec le val propre que tu viens de calculer
-        double norme = vecPropreMax.getNorme();
-        double ln = (value / (norme*norme));
-        Matrice tens = this->tensoriel(vect, vect);
+        double lambda = this->calculValeurPropreAssociee(vect);
+        this->lesValeursPropres.push_back(lambda);
 
-        //Matrice Mprime = (copieM) - (ln * this->tensoriel(vecPropreMax, vecPropreMax)); // vect propre
-        Matrice Mprime = (copieM) - (ln * this->tensoriel(vect, vect));
-
-        copieM = Mprime;
-
-        //Mprime.affiche();
-
+        double norme = vect.getNorme();
+        copieM = (copieM) - ((lambda / (norme*norme)) * Matrice::tensoriel(vect, vect));
     }
 
-    for (int i=0; i < (int)copieM.getNbLignes(); i++){
-        this->lesValeursPropres.at(i) = abs(this->lesValeursPropres.at(i));
-        //std::cout << this->lesValeursPropres.at(i) << std::endl;
-        //this->lesVecteursPropres.at(i).affiche();
-    }
-
-    std::sort(this->lesValeursPropres.begin(),this->lesValeursPropres.end());
-
-    /* Vérification des valeurs propres
-     *
-     * for (int i=0; i < copieM.getNbLignes(); i++){
-        std::cout << this->lesValeursPropres.at(i) << std::endl;
-    }
-    */
+    //std::sort(this->lesValeursPropres.begin(),this->lesValeursPropres.end());
 
     // Itération inverse pour la paire propre la plus proche de zéro
-
-    double valPropreMini = this->lesValeursPropres.at(0);
-    //std::cout << "la valeur propre mini en abs est " << valPropreMini << std::endl;
 
     // Vérification que toutes les paires ont été trouvés et sinon valeur propre = 0 et vecteur propre est nul
     if ( this->lesValeursPropres.size() < this->getNbLignes() )
     {
-        //std::cout << "Toutes les paires propres n'ont pas ete trouvees !" << std::endl;
+        std::cout << "Toutes les paires propres n'ont pas ete trouvees !" << std::endl;
         while ( this->lesValeursPropres.size() < this->getNbLignes() )
         {
             this->lesValeursPropres.push_back( 0.0 );
@@ -333,7 +306,7 @@ void Matrice::eigenAnalysis ( void )
     }
 
     // On range les valeurs/vecteurs propres et on lève le drapeau pour ne pas avoir à refaire l'analyse
-    this->ordonneValeurPropreAbsolue();
+    //this->ordonneValeurPropreAbsolue();
     this->eigen_analysis_effectuee = true;
 }
 

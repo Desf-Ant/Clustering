@@ -11,7 +11,6 @@ private :
     int classe;
 public:
     Note();
-//    Note(Note& n);
     Note(std::vector <double> dimensions);
     int getClasse ( void ) const;
     int getSizeDimension ( void ) const;
@@ -20,6 +19,8 @@ public:
     void setClasse ( int n );
     void ajoute ( const Note& autre );
     void affiche ( void ) const;
+
+    void removeCoeff ( int n );
 
     void setTranslation ( Note n );
 

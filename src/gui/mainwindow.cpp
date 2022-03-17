@@ -245,8 +245,35 @@ void MainWindow::openFile() {
 //    kn.execute();
 
     AnalyseCleanData acd = AnalyseCleanData(&notes);
-    acd.execute();
+    Notes cleanedNotes = Notes(acd.execute());
+//    cleanedNotes.affiche();
 
-//    ACPNotes acp = ACPNotes(&notes);
+    unsigned int nb_classes = this->choix_nb_classes->value();
+    type_dist type = (type_dist)(this->choix_distance->currentIndex());
+
+    HierarchicalNotes kn = HierarchicalNotes(&cleanedNotes, nb_classes, type);
+    kn.execute();
+
+    cleanedNotes.affiche();
+
+    std::vector < Notes > notess = std::vector < Notes >();
+    for (int i=0; i<(int)nb_classes;i++) {
+        notess.push_back(Notes());
+    }
+    for (int i=0; i<(int)cleanedNotes.getDonnees()->size();i++) {
+        notess.at(cleanedNotes.getNoteAt(i).getClasse()).addNote(cleanedNotes.getNoteAt(i));
+    }
+
+    for (int i=0; i<(int)notess.size();i++) {
+        std::cout << "cluster n "<< i <<" de taille " <<notess.at(i).getDonnees()->size() << std::endl;
+        if (notess.at(i).getDonnees()->size() == 0)
+            continue;
+        ACPNotes acp = ACPNotes(&(notess.at(i)));
+        acp.execute();
+    }
+
+
+
+//    ACPNotes acp = ACPNotes(&cleanedNotes);
 //    acp.execute();
 }
